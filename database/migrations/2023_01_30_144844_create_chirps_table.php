@@ -13,9 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('chirps', function (Blueprint $table) {
-            $table->id();
+        Schema::create('posts', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->text('caption');
+            $table->string('image');
             $table->timestamps();
+            // $table->index('user_id');
         });
     }
 
